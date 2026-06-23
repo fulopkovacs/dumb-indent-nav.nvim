@@ -8,4 +8,42 @@ function M.hello()
   print("Hello from dumb-indent-nav.nvim")
 end
 
+local function find_same_indent(direction)
+  local current_line = vim.api.nvim_win_get_cursor(0)[1]
+  local current_indent = vim.fn.indent(current_line)
+  local last_line = vim.api.nvim_buf_line_count(0)
+
+  for line = current_line + direction, direction > 0 and last_line or 1, direction do
+    if vim.fn.indent(line) == current_indent then
+      return line
+    end
+  end
+end
+
+function M.find_next_same_indent()
+  return find_same_indent(1)
+end
+
+function M.find_prev_same_indent()
+  return find_same_indent(-1)
+end
+
+local function goto_line(line)
+  if not line then
+    return false
+  end
+
+  local current_col = vim.api.nvim_win_get_cursor(0)[2]
+  vim.api.nvim_win_set_cursor(0, { line, current_col })
+  return true
+end
+
+function M.goto_next_same_indent()
+  return goto_line(M.find_next_same_indent())
+end
+
+function M.goto_prev_same_indent()
+  return goto_line(M.find_prev_same_indent())
+end
+
 return M
