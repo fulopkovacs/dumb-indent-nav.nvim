@@ -16,30 +16,45 @@ function M.hello()
     print("Hello from dumb-indent-nav.nvim")
 end
 
-local function find_same_indent(direction)
+local function find_same_indent(direction, count)
     local current_line = vim.api.nvim_win_get_cursor(0)[1]
     local current_indent = vim.fn.indent(current_line)
     local last_line = vim.api.nvim_buf_line_count(0)
+    local remaining = count or 1
 
     for line = current_line + direction, direction > 0 and last_line or 1, direction do
         local text = vim.api.nvim_buf_get_lines(0, line - 1, line, false)[1]
 
         if text:find("%S") and vim.fn.indent(line) == current_indent then
-            return line
+            remaining = remaining - 1
+
+            if remaining == 0 then
+                return line
+            end
         end
     end
 end
 
 --- Find the next nonblank line with the same indentation as the current line.
+---@param count? integer target the nth matching line
 ---@return integer? line 1-based target line number, or nil when there is no match
-function M.find_next_same_indent()
-    return find_same_indent(1)
+function M.find_next_same_indent(count)
+    return find_same_indent(1, count)
 end
 
 --- Find the previous nonblank line with the same indentation as the current line.
+---@param count? integer target the nth matching line
 ---@return integer? line 1-based target line number, or nil when there is no match
-function M.find_prev_same_indent()
-    return find_same_indent(-1)
+function M.find_prev_same_indent(count)
+    return find_same_indent(-1, count)
+end
+
+local function get_count(count)
+    if count and count > 0 then
+        return count
+    end
+
+    return vim.v.count1
 end
 
 local function is_last_line()
@@ -69,28 +84,30 @@ end
 ---
 --- If the cursor is already on the last line, this prints a message and does not
 --- move the cursor.
+---@param count? integer target the nth matching line, defaults to v:count1
 ---@return boolean moved true when the cursor moved to a matching line
-function M.goto_next_same_indent()
+function M.goto_next_same_indent(count)
     if is_last_line() then
         print("Already at last line")
         return false
     end
 
-    return goto_line(M.find_next_same_indent())
+    return goto_line(M.find_next_same_indent(get_count(count)))
 end
 
 --- Move to the previous nonblank line with the same indentation as the current line.
 ---
 --- If the cursor is already on the first line, this prints a message and does not
 --- move the cursor.
+---@param count? integer target the nth matching line, defaults to v:count1
 ---@return boolean moved true when the cursor moved to a matching line
-function M.goto_prev_same_indent()
+function M.goto_prev_same_indent(count)
     if is_first_line() then
         print("Already at first line")
         return false
     end
 
-    return goto_line(M.find_prev_same_indent())
+    return goto_line(M.find_prev_same_indent(get_count(count)))
 end
 
 return M

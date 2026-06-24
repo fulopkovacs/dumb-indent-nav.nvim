@@ -74,6 +74,9 @@ require("dumb-indent-nav").goto_next_same_indent()
 require("dumb-indent-nav").goto_prev_same_indent()
 ```
 
+Counts are supported. For example, if `<M-n>` calls `goto_next_same_indent()`,
+then `3<M-n>` moves to the third next line with the same indent.
+
 Or use the commands:
 
 ```vim
