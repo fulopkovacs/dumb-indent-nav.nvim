@@ -1,6 +1,6 @@
 # dumb-indent-nav.nvim
 
-Minimal Lua Neovim plugin.
+Navigate based on indents like a caveman.
 
 ## Usage
 
