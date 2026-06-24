@@ -15,38 +15,52 @@ dumb-indent-nav.setup({opts})                        *dumb-indent-nav.setup()*
       • {opts}  (`table?`)
 
                                      *dumb-indent-nav.find_next_same_indent()*
-dumb-indent-nav.find_next_same_indent()
+dumb-indent-nav.find_next_same_indent({count})
     Find the next nonblank line with the same indentation as the current line.
+
+    Parameters: ~
+      • {count}  (`integer?`) target the nth matching line
 
     Return: ~
         (`integer?`) 1-based target line number, or nil when there is no match
 
                                      *dumb-indent-nav.find_prev_same_indent()*
-dumb-indent-nav.find_prev_same_indent()
+dumb-indent-nav.find_prev_same_indent({count})
     Find the previous nonblank line with the same indentation as the current
     line.
+
+    Parameters: ~
+      • {count}  (`integer?`) target the nth matching line
 
     Return: ~
         (`integer?`) 1-based target line number, or nil when there is no match
 
                                      *dumb-indent-nav.goto_next_same_indent()*
-dumb-indent-nav.goto_next_same_indent()
+dumb-indent-nav.goto_next_same_indent({count})
     Move to the next nonblank line with the same indentation as the current
     line.
 
     If the cursor is already on the last line, this prints a message and does
     not move the cursor.
 
+    Parameters: ~
+      • {count}  (`integer?`) target the nth matching line, defaults to
+                 v:count1
+
     Return: ~
         (`boolean`) true when the cursor moved to a matching line
 
                                      *dumb-indent-nav.goto_prev_same_indent()*
-dumb-indent-nav.goto_prev_same_indent()
+dumb-indent-nav.goto_prev_same_indent({count})
     Move to the previous nonblank line with the same indentation as the
     current line.
 
     If the cursor is already on the first line, this prints a message and does
     not move the cursor.
+
+    Parameters: ~
+      • {count}  (`integer?`) target the nth matching line, defaults to
+                 v:count1
 
     Return: ~
         (`boolean`) true when the cursor moved to a matching line
