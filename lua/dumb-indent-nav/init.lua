@@ -1,5 +1,13 @@
 local M = {}
 
+---@brief
+--- Navigate between lines that have the same indentation as the current line.
+---
+--- Blank and whitespace-only lines are ignored. Cursor-moving functions place
+--- the cursor on the first non-whitespace character of the target line.
+
+--- Configure dumb-indent-nav.nvim.
+---@param opts? table
 function M.setup(opts)
     M.opts = opts or {}
 end
@@ -22,10 +30,14 @@ local function find_same_indent(direction)
     end
 end
 
+--- Find the next nonblank line with the same indentation as the current line.
+---@return integer? line 1-based target line number, or nil when there is no match
 function M.find_next_same_indent()
     return find_same_indent(1)
 end
 
+--- Find the previous nonblank line with the same indentation as the current line.
+---@return integer? line 1-based target line number, or nil when there is no match
 function M.find_prev_same_indent()
     return find_same_indent(-1)
 end
@@ -53,6 +65,11 @@ local function goto_line(line)
     return true
 end
 
+--- Move to the next nonblank line with the same indentation as the current line.
+---
+--- If the cursor is already on the last line, this prints a message and does not
+--- move the cursor.
+---@return boolean moved true when the cursor moved to a matching line
 function M.goto_next_same_indent()
     if is_last_line() then
         print("Already at last line")
@@ -62,6 +79,11 @@ function M.goto_next_same_indent()
     return goto_line(M.find_next_same_indent())
 end
 
+--- Move to the previous nonblank line with the same indentation as the current line.
+---
+--- If the cursor is already on the first line, this prints a message and does not
+--- move the cursor.
+---@return boolean moved true when the cursor moved to a matching line
 function M.goto_prev_same_indent()
     if is_first_line() then
         print("Already at first line")

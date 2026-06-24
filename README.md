@@ -44,3 +44,17 @@ Or use the commands:
 :DumbIndentNavNextSameIndent
 :DumbIndentNavPrevSameIndent
 ```
+
+## Development
+
+Run tests:
+
+```sh
+make test
+```
+
+Generate Vim help documentation from Lua annotations:
+
+```sh
+make docgen
+```

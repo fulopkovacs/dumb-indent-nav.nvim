@@ -1,0 +1,7 @@
+dumb-indent-nav	dumb-indent-nav.txt	/*dumb-indent-nav*
+dumb-indent-nav.find_next_same_indent()	dumb-indent-nav.txt	/*dumb-indent-nav.find_next_same_indent()*
+dumb-indent-nav.find_prev_same_indent()	dumb-indent-nav.txt	/*dumb-indent-nav.find_prev_same_indent()*
+dumb-indent-nav.goto_next_same_indent()	dumb-indent-nav.txt	/*dumb-indent-nav.goto_next_same_indent()*
+dumb-indent-nav.goto_prev_same_indent()	dumb-indent-nav.txt	/*dumb-indent-nav.goto_prev_same_indent()*
+dumb-indent-nav.setup()	dumb-indent-nav.txt	/*dumb-indent-nav.setup()*
+dumb-indent-nav.txt	dumb-indent-nav.txt	/*dumb-indent-nav.txt*

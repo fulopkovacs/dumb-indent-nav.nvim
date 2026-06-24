@@ -1,0 +1,55 @@
+*dumb-indent-nav.txt*        Navigate between lines with the same indentation.
+
+==============================================================================
+API                                                          *dumb-indent-nav*
+
+Navigate between lines that have the same indentation as the current line.
+
+Blank and whitespace-only lines are ignored. Cursor-moving functions place the
+cursor on the first non-whitespace character of the target line.
+
+dumb-indent-nav.setup({opts})                        *dumb-indent-nav.setup()*
+    Configure dumb-indent-nav.nvim.
+
+    Parameters: ~
+      • {opts}  (`table?`)
+
+                                     *dumb-indent-nav.find_next_same_indent()*
+dumb-indent-nav.find_next_same_indent()
+    Find the next nonblank line with the same indentation as the current line.
+
+    Return: ~
+        (`integer?`) 1-based target line number, or nil when there is no match
+
+                                     *dumb-indent-nav.find_prev_same_indent()*
+dumb-indent-nav.find_prev_same_indent()
+    Find the previous nonblank line with the same indentation as the current
+    line.
+
+    Return: ~
+        (`integer?`) 1-based target line number, or nil when there is no match
+
+                                     *dumb-indent-nav.goto_next_same_indent()*
+dumb-indent-nav.goto_next_same_indent()
+    Move to the next nonblank line with the same indentation as the current
+    line.
+
+    If the cursor is already on the last line, this prints a message and does
+    not move the cursor.
+
+    Return: ~
+        (`boolean`) true when the cursor moved to a matching line
+
+                                     *dumb-indent-nav.goto_prev_same_indent()*
+dumb-indent-nav.goto_prev_same_indent()
+    Move to the previous nonblank line with the same indentation as the
+    current line.
+
+    If the cursor is already on the first line, this prints a message and does
+    not move the cursor.
+
+    Return: ~
+        (`boolean`) true when the cursor moved to a matching line
+
+
+ vim:tw=78:ts=8:sw=4:sts=4:et:ft=help:norl:
