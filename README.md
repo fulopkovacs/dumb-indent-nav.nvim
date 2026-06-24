@@ -4,10 +4,46 @@ Minimal Lua Neovim plugin.
 
 ## Usage
 
+With [`lazy.nvim`](https://github.com/folke/lazy.nvim):
+
 ```lua
 {
   "dumb-indent-nav.nvim",
-  dev = true,
+  config = function()
+    require("dumb-indent-nav").setup()
+  end,
+}
+```
+
+There are no default key mappings, this is what I use:
+
+```lua
+{
+  "dumb-indent-nav.nvim",
+  -- Recommended keys (not default)
+  keys = {
+    {
+        "<M-n>",
+        function()
+            require("dumb-indent-nav").goto_next_same_indent()
+        end,
+        desc = "next dumb indent nav",
+        mode = {
+            "n",
+            "x",
+        },
+    }, {
+        "<M-p>",
+        function()
+            require("dumb-indent-nav").goto_prev_same_indent()
+        end,
+        desc = "prev dumb indent nav",
+        mode = {
+            "n",
+            "x",
+        },
+    },
+  },
   config = function()
     require("dumb-indent-nav").setup()
   end,
@@ -46,6 +82,17 @@ Or use the commands:
 ```
 
 ## Development
+
+Install the plugin in `dev` mode:
+
+```lua
+{
+  "dumb-indent-nav.nvim",
+    config = function()
+    require("dumb-indent-nav").setup()
+  end,
+}
+```
 
 Run tests:
 
