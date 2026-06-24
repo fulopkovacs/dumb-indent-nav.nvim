@@ -54,6 +54,7 @@ end
 function M.goto_next_same_indent()
     if is_last_line() then
         print("Already at last line")
+        return false
     end
 
     return goto_line(M.find_next_same_indent())
@@ -62,6 +63,7 @@ end
 function M.goto_prev_same_indent()
     if is_first_line() then
         print("Already at first line")
+        return false
     end
 
     return goto_line(M.find_prev_same_indent())
