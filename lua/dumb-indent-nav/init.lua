@@ -14,7 +14,9 @@ local function find_same_indent(direction)
   local last_line = vim.api.nvim_buf_line_count(0)
 
   for line = current_line + direction, direction > 0 and last_line or 1, direction do
-    if vim.fn.indent(line) == current_indent then
+    local text = vim.api.nvim_buf_get_lines(0, line - 1, line, false)[1]
+
+    if text:find("%S") and vim.fn.indent(line) == current_indent then
       return line
     end
   end
