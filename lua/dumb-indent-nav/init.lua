@@ -43,10 +43,12 @@ local function goto_line(line)
         return false
     end
 
-    local current_col = vim.api.nvim_win_get_cursor(0)[2]
+    local text = vim.api.nvim_buf_get_lines(0, line - 1, line, false)[1]
+    local first_non_whitespace_col = text:find("%S") - 1
+
     vim.api.nvim_win_set_cursor(0, {
         line,
-        current_col,
+        first_non_whitespace_col,
     })
     return true
 end
